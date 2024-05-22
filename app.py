@@ -1,3 +1,4 @@
+# Imports
 from flask import Flask, request, jsonify, send_from_directory
 import pickle
 import nltk
@@ -18,17 +19,17 @@ def preprocess_text(text):
     return ' '.join(tokens)
 
 # Carregar o vetorizador e o classificador Naive Bayes
-with open('tfidf_vectorizer.pkl', 'rb') as f:
+with open('data/tfidf_vectorizer.pkl', 'rb') as f:
     tfidf_vectorizer = pickle.load(f)
-with open('nb_classifier.pkl', 'rb') as f:
+with open('data/nb_classifier.pkl', 'rb') as f:
     nb_classifier = pickle.load(f)
 
-# Inicializar o Flask
+# Iniciar o Flask
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return send_from_directory('.', 'index.html')
+    return send_from_directory('.', 'static/index.html')
 
 @app.route('/classify', methods=['POST'])
 def classify():
@@ -43,4 +44,6 @@ def classify():
     return jsonify({'category': prediction[0]})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # tornar a API Flask acessível de fora do contêiner
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
