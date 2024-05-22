@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificação de Notícias</title>
+</head>
+<body>
+    <h1>Classificação de Notícias</h1>
+    <form id="classifyForm">
+        <textarea id="text" rows="4" cols="50" placeholder="Digite o texto da notícia aqui..."></textarea><br>
+        <button type="submit">Classificar</button>
+    </form>
+    <h2>Categoria Prevista:</h2>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('classifyForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const text = document.getElementById('text').value;
+            const response = await fetch('/classify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text })
+            });
+            const data = await response.json();
+            document.getElementById('result').innerText = data.category;
+        });
+    </script>
+</body>
+</html>
