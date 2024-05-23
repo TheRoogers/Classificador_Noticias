@@ -4,7 +4,7 @@ FROM python:3.9-slim
 # diretório dentro do container
 WORKDIR /app
 
-# Copie os arquivos para o diretório dentro do contêiner
+# Copiando os arquivos para o diretório dentro do contêiner
 COPY . .
 
 # Instalando as dependências do Python
