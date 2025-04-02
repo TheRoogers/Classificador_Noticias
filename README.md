@@ -1,4 +1,4 @@
-# Projeto de Classificação de Notícias - Teste técnico - Cientista de Dados Jr. - AeC
+# Projeto de Classificação de Notícias
 
 Este projeto visa criar um classificador de notícias baseado em categorias usando técnicas de aprendizado de máquina.
 
